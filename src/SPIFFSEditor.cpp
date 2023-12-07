@@ -440,14 +440,14 @@ void SPIFFSEditor::handleRequest(AsyncWebServerRequest *request){
     if(request->hasParam("list")){
       String path = request->getParam("list")->value();
 #ifdef ESP32
-      File dir = _fs.open(path);
+      fs::File dir = _fs.open(path);
 #else
       Dir dir = _fs.openDir(path);
 #endif
       path = String();
       String output = "[";
 #ifdef ESP32
-      File entry = dir.openNextFile();
+      fs::File entry = dir.openNextFile();
       while(entry){
 #else
       while(dir.next()){
